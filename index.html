@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Use custom A-Frame build until this gets merged in https://github.com/aframevr/aframe/pull/5040 -->
+    <!-- <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script> -->
+    <script src="lib/aframe-master.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+    <!-- Start PhysX importing. My own PhysX build with Zach's A-Frame components -->
+    <script src="lib/physx.release.js"></script>
+    <script>
+      VARTISTE_TOOLKIT = {
+        includeFiles: ['physics']
+      }
+    </script>
+    <script src="https://unpkg.com/aframe-vartiste-toolkit@1.32.0/vartiste-toolkit.js"></script>
+    <!-- End PhysX importing -->
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <a-scene physx="autoLoad: true; wasmUrl: ./physx.release.wasm; delay: 1000">
+      <a-entity environment="preset: default"></a-entity>
+      <a-box physx-body="type: static" position="0 0.5 -1" color="#222"></a-box>
+      <a-entity id="player">
+        <a-camera id="head"></a-camera>
+        <a-entity id="leftController" tracked-controls="hand: left; space: gripSpace"></a-entity>
+        <a-box id="leftHand" color="red" width=".1" height=".1" depth=".1" 
+        physx-body="type: dynamic; mass: 5" physics-hand="hand: left;"></a-box>
+        <a-entity id="rightController" tracked-controls="hand: right; space: gripSpace"></a-entity>
+        <a-box id="rightHand" color="red" width=".1" height=".1" depth=".1"
+        physx-body="type: dynamic; mass: 5" physics-hand="hand: right;"></a-box>
+      </a-entity>
+      <!-- Box pyramid -->
+      <a-box physx-body="type: dynamic" position="-.1 1.2 -.7" color="red" width=".1" height=".1" depth=".1"></a-box>
+      <a-box physx-body="type: dynamic" position="0 1.2 -.7" color="red" width=".1" height=".1" depth=".1"></a-box>
+      <a-box physx-body="type: dynamic" position=".1 1.2 -.7" color="red" width=".1" height=".1" depth=".1"></a-box>
+      <a-box physx-body="type: dynamic" position="-.05 1.3 -.7" color="red" width=".1" height=".1" depth=".1"></a-box>
+      <a-box physx-body="type: dynamic" position=".05 1.3 -.7" color="red" width=".1" height=".1" depth=".1"></a-box>
+      <a-box physx-body="type: dynamic" position="0 1.4 -.7" color="red" width=".1" height=".1" depth=".1"></a-box>
+    </a-scene>
+  </body>
+</html>
